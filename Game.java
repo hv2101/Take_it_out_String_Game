@@ -1,5 +1,7 @@
+import java.awt.event.ActionEvent;
+import java.util.ArrayList;
 import java.util.Arrays;
-
+import java.util.HashMap;
 /**
  *
  * @author harshvardhan
@@ -59,25 +61,25 @@ public class Game extends javax.swing.JFrame {
         });
 
         game_string.setForeground(new java.awt.Color(102, 102, 0));
-        game_string.setText("Game String : ");
+        //game_string.setText("Game String : ");
 
         current_string.setForeground(new java.awt.Color(102, 0, 102));
-        current_string.setText("Current String : ");
+        //current_string.setText("Current String : ");
 
         computer_choice.setForeground(new java.awt.Color(0, 102, 102));
-        computer_choice.setText("Computer Choice :");
+        //computer_choice.setText("Computer Choice :");
 
         computer_score.setForeground(new java.awt.Color(0, 102, 102));
-        computer_score.setText("Computer Score : ");
+        //computer_score.setText("Computer Score : ");
 
         player_score.setForeground(new java.awt.Color(0, 102, 102));
-        player_score.setText("Player Score : ");
+        //player_score.setText("Player Score : ");
 
         error.setForeground(new java.awt.Color(255, 0, 0));
-        error.setText("Error : ");
+        //error.setText("Error : ");
 
         winner.setForeground(new java.awt.Color(0, 0, 255));
-        winner.setText("Winner :");
+        //winner.setText("Winner :");
 
         player_choice.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -190,16 +192,14 @@ public class Game extends javax.swing.JFrame {
     }// </editor-fold>
 
     private void player_choiceActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
+        //Text field where user inputs his choice
     }
 
-    private void enter_playerActionPerformed(java.awt.event.ActionEvent evt) {
+    private void enter_playerActionPerformed(ActionEvent evt) {
         //Player Enter click will continue the game
         //Entering the loop of game until all given string is empty and winner is declared
-        while(!Game_Over){
-            playUser();
-            playComputer();
-        }
+        playUser();
+        playComputer();
     }
 
     private void computerActionPerformed(java.awt.event.ActionEvent evt) {
@@ -208,6 +208,7 @@ public class Game extends javax.swing.JFrame {
         Game_String = randomString();
         game_string.setText("Game String : "+Arrays.toString(Game_String));
         Score();
+        Game_tree();
         playComputer();
     }
 
@@ -217,6 +218,7 @@ public class Game extends javax.swing.JFrame {
         Game_String = randomString();
         game_string.setText("Game String : "+Arrays.toString(Game_String));
         Score();
+        Game_tree();
         winner.setText("Play your first move..!!");
     }
     static int[] Game_String;//Store the Game String
@@ -261,7 +263,9 @@ public class Game extends javax.swing.JFrame {
 
 
     static void playUser(){
+        //This Function takes the input of the user and update the scores and string of the game
         if(Game_String.length!=0){
+            winner.setText("");
             int n2 = Integer.parseInt(player_choice.getText());
             updated_string = returnString(Game_String, n2);
             Game_String = updated_string;
@@ -274,7 +278,9 @@ public class Game extends javax.swing.JFrame {
     }
 
     static void playComputer(){
+        //This Function makes takes the input of the computer and update the scores and string of the game
         if(Game_String.length!=0){
+            winner.setText("");
             int n1 = AI_Evaluation(Game_String);
             computer_choice.setText("Computer Move : "+n1);
             updated_string = returnString(Game_String, n1);
@@ -351,8 +357,75 @@ public class Game extends javax.swing.JFrame {
             Game_Over = true;
         }
     }
-    static void error(int[] arr, int n){
+
+    //The code to make the game tree on terminal
+    static void Game_tree(){
+        //this function calls the functions below to create the game tree of the given array
+
+        //int[] arr = {1,2,3,4,5,};
+        //int[] arr = randomString();
+        int[] arr = Game_String;
+        ArrayList<int[]> list = new ArrayList<>();
+        list.add(arr);
+        HashMap<Integer, ArrayList<int[]>> graph = new HashMap<>();
+        graph.put(0, list);
+
+        for (int i = 1; i< arr.length+1; i++){
+            ArrayList<int[]> newList = new ArrayList<>();
+            graph.put(i, newList);
+        }
+
+        getGraph(graph, 0);
+
+        for (int i = 0; i < graph.size(); i++){
+            System.out.print("Level : "+i+": ");
+            for (int j = 0; j < graph.get(i).size(); j++){
+                System.out.print(Arrays.toString(graph.get(i).get(j))+" ");
+            }
+            System.out.println();
+        }
     }
+
+    static void getGraph(HashMap<Integer, ArrayList<int[]>> graph, int height){
+        //State Space Graph is generated through this function
+        ArrayList<int[]> parent = new ArrayList<>();
+
+        if (graph.get(height).size()<=0) return;
+
+        for (int i = 0; i < graph.get(height).size(); i++){
+            ArrayList<int[]> list = getList(graph.get(height).get(i));
+            parent.addAll(list);
+        }
+        graph.put(height+1, parent);
+
+        getGraph(graph, height+1);
+    }
+
+    static ArrayList<int[]> getList(int[] arr){
+        //This function will return the arraylist of integer arrays of current node.
+        ArrayList<int[]> parent  = new ArrayList<>();
+        for (int i = 0; i < arr.length; i++){
+            int[] newArr = getArr(arr, i);
+            parent.add(newArr);
+        }
+        return parent;
+    }
+
+    static int[] getArr(int[] arr, int index){
+        //This function will return the final array which is one less than original array with one less element.
+        int[] newArr = new int[arr.length-1];
+
+        for (int i = 0; i < index; i++){
+            newArr[i] = arr[i];
+        }
+
+        for (int i = index+1; i < arr.length; i++){
+            newArr[i-1] = arr[i];
+        }
+
+        return newArr;
+    }
+
 
 
     // Variables declaration - do not modify
@@ -361,7 +434,7 @@ public class Game extends javax.swing.JFrame {
     private static javax.swing.JLabel computer_score;//it will show the sore of computer
     private static javax.swing.JLabel current_string;//it will the current string of the game from which the number will be taken out
     private javax.swing.JButton enter_player;//it enters the choice of player in the program and proceed the game
-    private javax.swing.JLabel error;//it will show the invalid output and ask the user to correct its input
+    private static javax.swing.JLabel error;//it will show the invalid output and ask the user to correct its input
     private javax.swing.JLabel game_string;//it will show the game string
     private javax.swing.JLabel option;//it says that who will start the game
     private javax.swing.JPanel panel2;
