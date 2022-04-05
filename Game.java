@@ -195,7 +195,7 @@ public class Game extends javax.swing.JFrame {
 
     private void enter_playerActionPerformed(java.awt.event.ActionEvent evt) {
         //Player Enter click will continue the game
-        //Entering the loop of game until all given string is empty
+        //Entering the loop of game until all given string is empty and winner is declared
         while(!Game_Over){
             playUser();
             playComputer();
@@ -219,13 +219,13 @@ public class Game extends javax.swing.JFrame {
         Score();
         winner.setText("Play your first move..!!");
     }
-    static int[] Game_String;
-    static int score1 = 0;
-    static int score2 = 0;
-    static int player1;
-    static int player2;
-    static int[] updated_string;
-    static boolean Game_Over = false;
+    static int[] Game_String;//Store the Game String
+    static int score1 = 0;//Used just to transfer the score of player1 and store back
+    static int score2 = 0;//Used just to transfer the score of player1 and store back
+    static int player1;//Stores the Score of Computer
+    static int player2;//Stores the Score of Player
+    static int[] updated_string;//Store the Updated string of the game
+    static boolean Game_Over = false;//To run the game in loop
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -262,41 +262,27 @@ public class Game extends javax.swing.JFrame {
 
     static void playUser(){
         if(Game_String.length!=0){
-            //System.out.println("Player 2 Turn : ");
-            //int n2 = in.nextInt();
-
             int n2 = Integer.parseInt(player_choice.getText());
-            //System.out.println("Player 2 Selection : "+n1);
-
             updated_string = returnString(Game_String, n2);
             Game_String = updated_string;
-            //System.out.println("New String : "+ Arrays.toString(Game_String));
             current_string.setText("Left Choice : "+ Arrays.toString(Game_String));
             score2 = player2 - n2;
             player2 = score2;
             player_score.setText("Player Score : "+player2);
-            //System.out.println("Player 2 Score : "+score2);
             End();
         }
     }
 
     static void playComputer(){
         if(Game_String.length!=0){
-            //System.out.println("Player 1 Turn : ");
-            //int n1 = in.nextInt();
-
             int n1 = AI_Evaluation(Game_String);
             computer_choice.setText("Computer Move : "+n1);
-            //System.out.println("Player 1 Selection : "+n1);
-
             updated_string = returnString(Game_String, n1);
             Game_String = updated_string;
-            //System.out.println("New String : "+ Arrays.toString(Game_String));
             current_string.setText("Left Choice : "+ Arrays.toString(Game_String));
             score1 = player1 - n1;
             player1 = score1;
             computer_score.setText("Computer Score : "+player1);
-            //System.out.println("Player 1 Score : "+score1);
             End();
         }
     }
@@ -365,23 +351,25 @@ public class Game extends javax.swing.JFrame {
             Game_Over = true;
         }
     }
+    static void error(int[] arr, int n){
+    }
 
 
     // Variables declaration - do not modify
-    private javax.swing.JButton computer;
-    private static javax.swing.JLabel computer_choice;
-    private static javax.swing.JLabel computer_score;
-    private static javax.swing.JLabel current_string;
-    private javax.swing.JButton enter_player;
-    private javax.swing.JLabel error;
-    private javax.swing.JLabel game_string;
-    private javax.swing.JLabel option;
+    private javax.swing.JButton computer;//Button that will start the game with computer making the first move
+    private static javax.swing.JLabel computer_choice;//it will show the last choice made by the computer from the string
+    private static javax.swing.JLabel computer_score;//it will show the sore of computer
+    private static javax.swing.JLabel current_string;//it will the current string of the game from which the number will be taken out
+    private javax.swing.JButton enter_player;//it enters the choice of player in the program and proceed the game
+    private javax.swing.JLabel error;//it will show the invalid output and ask the user to correct its input
+    private javax.swing.JLabel game_string;//it will show the game string
+    private javax.swing.JLabel option;//it says that who will start the game
     private javax.swing.JPanel panel2;
     private javax.swing.JPanel panel3;
-    private javax.swing.JButton player;
-    private static javax.swing.JTextField player_choice;
-    private static javax.swing.JLabel player_score;
-    private javax.swing.JLabel title;
-    private static javax.swing.JLabel winner;
+    private javax.swing.JButton player;//it will start the game with player making the first move in the game
+    private static javax.swing.JTextField player_choice;//it will take the input from the user for its entry
+    private static javax.swing.JLabel player_score;//it will show the score of the player
+    private javax.swing.JLabel title;//it shows "Take It Out Game"
+    private static javax.swing.JLabel winner;//it will show who won the game
     // End of variables declaration
 }
