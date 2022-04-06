@@ -1,6 +1,16 @@
 # Take it out String Game
  
-User Manual
+ 
+ The class **take_it_out.java** contains the terminal code of the game where computer makes the first move.
+
+The class **Game_tree.java** contains the the code for creating the state space graph of this game.
+
+The class **Game.java** contains the code for full game with GUI which has been created using Swing library as well as the implementation of the state space graph which will be generated and shown in the backend on the terminal of the IDE when the new game string is created to start the game.
+
+ 
+ 
+**User Manual**
+
 The user have the option to select who make the first move in the game, the computer or the player.
 The game starts with a random numerical string each time a game is started. At the start of the game both the computer and player will have their score as 100. Each make move in sequential manner entering one number from the string and that number will be subtracted from the score. The game ends when the numerical string becomes empty. The one with the higher score wins the game.
 The user will have option to play a new game after a game has ended or in the mid of the game by clicking on the button saying computer and player. Clicking computer button will start the game with the first move made by the computer. Clicking player button will start the game and the user needs to make the first move in the game.
