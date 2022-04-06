@@ -349,10 +349,10 @@ public class Game extends javax.swing.JFrame {
         //Check if the current string is empty or not if empty then declare the winner
         if(Game_String.length==0){
             if(score1>score2){
-                winner.setText("Player 1 wins the game with the highest score : "+score1);
+                winner.setText("Computer wins the game with the highest score : "+score1);
             }
             else {
-                winner.setText("Player 2 wins the game with the highest score : "+score2);
+                winner.setText("You win the game with the highest score : "+score2);
             }
             Game_Over = true;
         }
