@@ -55,8 +55,7 @@ Player score = 97
 Player wins the game wins the game with higher score of 97.
 
 GUI of the game:
-![Screenshot 2022-04-06 at 12 23 16 PM](https://user-images.githubusercontent.com/61689173/1619490![Screenshot 2022-04-06 at 12 23 52 PM](https://user-images.githubusercontent.com/61689173/161949077-cb5ec0d2-2a9b-445a-9d![Screenshot 2022-04-06 at 12 24 16 PM](https://user-images.githubusercontent.com/61689173/161949085-7b849e45-c751-43af-965f-f13f116fc298.png)
-40-263260764d41.png)
-68-d686e1ad-cf4d-416a-8a38-efacf1a0134b.png)
-
-![Screenshot 2022-04-06 at 12 22 40 PM](https://user-images.githubusercontent.com/61689173/161949064-1093968f-5bf1-4c06-8efd-97a0f68c5c1f.png)
+![Screenshot 2022-04-06 at 12 22 40 PM](https://user-images.githubusercontent.com/61689173/161949315-84de7742-0e43-4aeb-8986-65bca7d5379a.png)
+![Screenshot 2022-04-06 at 12 23 16 PM](https://user-images.githubusercontent.com/61689173/161949338-a39f6b5a-ffaf-4fa2-aa05-a0ae020d52f7.png)
+![Screenshot 2022-04-06 at 12 23 52 PM](https://user-images.githubusercontent.com/61689173/161949351-e76839e2-5c7b-42be-95fc-8a8230af02dd.png)
+![Screenshot 2022-04-06 at 12 24 16 PM](https://user-images.githubusercontent.com/61689173/161949361-5175d7e9-7ac3-4a96-a925-c1b6722951c6.png)
